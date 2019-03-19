@@ -11,7 +11,8 @@ passport.use(
         clientSecret: keys.google.clientSecret,
         callbackURL: '/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
-        console.log(profile); 
+        console.log(profile);
+        return done(null, profile);
     })
 );
 
@@ -22,8 +23,8 @@ passport.use(new OpenIdStrategy({
         authorizationURL: 'http://localhost:8080/openid-connect-server-webapp/authorize',
         userInfoURL: 'http://localhost:8080/openid-connect-server-webapp/userinfo',
         tokenURL: 'http://localhost:8080/openid-connect-server-webapp/token',
-        returnURL: '/auth/openid/redirect'
-    }, (req, issuer, userId, profile, accessToken, refreshToken, params, cb) => {
+        callbackURL: '/auth/openid/redirect'
+    }, (req, issuer, userId, profile, accessToken, refreshToken, params, done) => {
         
         console.log('issuer:', issuer);
         console.log('userId:', userId);
@@ -31,6 +32,6 @@ passport.use(new OpenIdStrategy({
         console.log('refreshToken:', refreshToken);
         console.log('params:', params);
       
-        return cb(null, profile);
+        return done(null, profile);
     })
 );

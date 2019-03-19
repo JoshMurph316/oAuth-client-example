@@ -1,31 +1,35 @@
 const router = require('express').Router();
 const passport = require('passport');
+const resources = require('../config/resources');
 
-// auth login
+// app routing
 router.get('/login', (req, res) => {
     res.render('login', { user: req.user });
 });
-
-// auth logout
 router.get('/logout', (req, res) => {
-    // handle with passport
     res.send('logging out');
 });
 
+
+// oAuth routing: google
 router.get('/google', passport.authenticate('google', {
     scope: ['profile']
 }));
-
-router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.send('you reached the redirect URI');
+router.get('/google/redirect', passport.authenticate('google', { session: false }), (req, res) => {
+    res.json(resources);
 });
 
+
+// oAuth routing: openID Connect
 router.get('/openid', passport.authenticate('openidconnect', {
     scope: ['profile']
 }));
-
-router.get('/openid/redirect', passport.authenticate('openidconnect'), (req, res) => {
-    res.send('you reached the redirect URI');
+router.get('/openid/redirect', passport.authenticate('openidconnect', { session: false }), (req, res) => {
+    res.redirect('/auth/openid/resources');
 });
+router.get('/openid/resources', (req, res) => {
+    res.json(resources);
+});
+
 
 module.exports = router;
