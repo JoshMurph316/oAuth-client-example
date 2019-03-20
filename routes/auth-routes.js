@@ -25,9 +25,6 @@ router.get('/openid', passport.authenticate('openidconnect', {
     scope: ['profile']
 }));
 router.get('/openid/redirect', passport.authenticate('openidconnect', { session: false }), (req, res) => {
-    res.redirect('/auth/openid/resources');
-});
-router.get('/openid/resources', (req, res) => {
     res.json(resources);
 });
 
