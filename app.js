@@ -5,7 +5,7 @@ session         = require('express-session'),
 
 // local files
 keys            = require('./config/keys'),
-passportSetup   = require('./config/passport-setup'),
+passportSetup   = require('./passport-setup'),
 authRoutes      = require('./routes/auth-routes');
 
 const app = express();

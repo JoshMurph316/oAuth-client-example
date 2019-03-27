@@ -22,7 +22,7 @@ router.get('/google/redirect', passport.authenticate('google', { session: false 
 
 // oAuth routing: openID Connect
 router.get('/openid', passport.authenticate('openidconnect', {
-    scope: ['profile']
+    scope: ['profile', 'email']
 }));
 router.get('/openid/redirect', passport.authenticate('openidconnect', { session: false }), (req, res) => {
     res.json(resources);
