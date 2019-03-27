@@ -1,8 +1,9 @@
 # oAuth-client-example
 
 - After you clone the repo, cd into oAuth-client-example
--- run npm install
-
+```
+npm install
+```
 -- To enable the google sso feature, register this application with the Google API service.
 for more information -> https://console.developers.google.com/apis/dashboard
 
