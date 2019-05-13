@@ -3,14 +3,31 @@
     <head>
         <meta charset="utf-8">
         <title>OAuth Example</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <style>
+            a {
+                text-decoration: none;
+                color: #FF5353;
+            }
             body{
                 font-family: arial;
                 margin: 0;
             }
+            .card {
+                width: 18rem;
+                margin-bottom: 15px;
+            }
+            main, header{
+                max-width: 960px;
+                margin: 30px auto;
+                padding: 0 10px;
+                color: #333;
+            }
             nav{
                 background: #ff5353;
                 padding: 20px 10px;
+                text-align: right;
             }
             nav ul{
                 max-width: 960px;
@@ -30,32 +47,51 @@
                 padding: 10px;
                 display: block;
             }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
+            .user-list {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding: 10px;
             }
+
         </style>
     </head>
     <body>
     
         <nav>
             <ul>
-            <li><a href="/auth/logout">Logout</a></li>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/">Homepage</a></li>
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/">Home</a></li>
             </ul>
         </nav>
 
         <header>
-            <h1>OAuth test app</h1>
-            <h2>Homepage</h2>
+            <h1>OAuth Test Application</h1>
+            <hr>
         </header>
 
         <main>
+            <% if (locals.users) { %>
 
+                <h3>User list:</h3>
 
+                <div class="user-list">
+                    <% users.forEach(user => { %>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= user.name %></h5>
+                                <p class="card-text">id: <%= user.id %></p>
+                                <p class="card-text">location: <%= user.location %></p>
+                                <p class="card-text">phone: <%= user.phone %></p>
+                                <p class="card-text">email: <%= user.email %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+
+            <% } else { %>
+                <h3><a href="/auth/login">Login</a> to access resources</h3>
+            <% } %>
 
         </main>
         

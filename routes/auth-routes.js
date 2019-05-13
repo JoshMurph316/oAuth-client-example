@@ -4,7 +4,7 @@ const resources = require('../config/resources');
 
 // app routing
 router.get('/login', (req, res) => {
-    res.render('login', { user: req.user });
+    res.render('login');
 });
 router.get('/logout', (req, res) => {
     res.send('logging out');
@@ -25,7 +25,10 @@ router.get('/openid', passport.authenticate('openidconnect', {
     scope: ['profile', 'email']
 }));
 router.get('/openid/redirect', passport.authenticate('openidconnect', { session: false }), (req, res) => {
-    res.json(resources);
+    res.render('home', {
+        users: resources.Users,
+        status: 'succuss'
+    });
 });
 
 

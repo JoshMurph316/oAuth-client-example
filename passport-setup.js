@@ -17,15 +17,16 @@ passport.use(
 );
 
 passport.use(new OpenIdStrategy({
-        issuer: 'http://localhost:8080/openid-connect-server-webapp/',
-        clientID: keys.openID.clientID,
-        clientSecret: keys.openID.clientSecret,
-        authorizationURL: 'http://localhost:8080/openid-connect-server-webapp/authorize',
-        userInfoURL: 'http://localhost:8080/openid-connect-server-webapp/userinfo',
-        tokenURL: 'http://localhost:8080/openid-connect-server-webapp/token',
-        callbackURL: '/auth/openid/redirect'
+    issuer: 'http://cd2api:8080/openid-connect-server-webapp/',
+    clientID: keys.openID.clientID,
+    clientSecret: keys.openID.clientSecret,
+    authorizationURL: 'http://cd2api:8080/openid-connect-server-webapp/authorize',
+    userInfoURL: 'http://cd2api:8080/openid-connect-server-webapp/userinfo',
+    tokenURL: 'http://cd2api:8080/openid-connect-server-webapp/token',
+
+    // full redirect url: http://cd2api:3000/auth/openid/redirect
+    callbackURL: '/auth/openid/redirect'
     }, (req, issuer, userId, profile, accessToken, refreshToken, params, done) => {
-        
         console.log('issuer:', issuer);
         console.log('userId:', userId);
         console.log('accessToken:', accessToken);
